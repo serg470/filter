@@ -8,15 +8,17 @@ services:
     volumes:
     - /opt/data/rkn:/home/zapret
   mysql:
-    image: "mysql:latest"
+    image: "mysql:5.7"
+    command: --init-file /data/application/init.sql
     volumes:
-      - mysql-data:/opt/data/mysql
+      - ./init.sql:/data/application/init.sql
+      - /opt/data/mysql:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "n95ow4"
       MYSQL_DATABASE: "rkn"
+      MYSQL_USER: "serg470"
+      MYSQL_PASSWORD: "n95ow4"
     ports:
-      - "3306:3306"
-volumes:
-    mysql-data: {}
+      - "127.0.0.1:3306:3306"
 
