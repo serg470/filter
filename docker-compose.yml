@@ -6,7 +6,7 @@ services:
     restart: always
     container_name: rkn
     volumes:
-    - /opt/data/rkn:/home/zapret
+      - /opt/data/rkn:/home/zapret
   mysql:
     image: "mysql:5.7"
     command: --init-file /data/application/init.sql
@@ -21,4 +21,11 @@ services:
       MYSQL_PASSWORD: "n95ow4"
     ports:
       - "127.0.0.1:3306:3306"
-
+  web:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./site.conf:/etc/nginx/conf.d/site.conf
+      - ./web/:/usr/share/nginx/html/test/
+    ports:
+      - 80:80
