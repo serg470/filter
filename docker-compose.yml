@@ -7,5 +7,16 @@ services:
     container_name: rkn
     volumes:
     - /opt/data/rkn:/home/zapret
-#  mysql:
-#    image: "mysql:latest"
+  mysql:
+    image: "mysql:latest"
+    volumes:
+      - mysql-data:/opt/data/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "n95ow4"
+      MYSQL_DATABASE: "rkn"
+    ports:
+      - "3306:3306"
+volumes:
+    mysql-data: {}
+
