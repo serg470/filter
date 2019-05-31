@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  rkn:
+    build: .
+    restart: always
+    container_name: rkn
+    volumes:
+    - /opt/data/rkn:/home/zapret
+#  mysql:
+#    image: "mysql:latest"
