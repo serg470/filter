@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   rkn:
-    build: .
+    build: ./rkn/
     restart: always
     container_name: rkn
     volumes:
@@ -11,7 +11,7 @@ services:
     image: "mysql:5.7"
     command: --init-file /data/application/init.sql
     volumes:
-      - ./init.sql:/data/application/init.sql
+      - ./sql/init.sql:/data/application/init.sql
       - /opt/data/mysql:/var/lib/mysql
     restart: always
     environment:
@@ -20,12 +20,26 @@ services:
       MYSQL_USER: "serg470"
       MYSQL_PASSWORD: "n95ow4"
     ports:
-      - "127.0.0.1:3306:3306"
+      - "0.0.0.0:3306:3306"
   web:
-    image: nginx:latest
+    build: ./nginx/
+#    image: nginx:latest
+    restart: always
     container_name: nginx
     volumes:
-      - ./site.conf:/etc/nginx/conf.d/site.conf
-      - ./web/:/usr/share/nginx/html/test/
+      - ./nginx/site.conf:/etc/nginx/conf.d/site.conf
+      - ./nginx/web:/var/www/
     ports:
       - 80:80
+    links:
+      - php
+  php:
+    build: ./php/
+    image: php:7.2-fpm
+    restart: always
+    container_name: php7.2
+    ports: 
+      - 9000:9000
+    volumes:
+      - ./nginx/web:/var/www
+      - ./php/php.ini:/usr/local/etc/php.ini
