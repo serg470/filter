@@ -19,8 +19,11 @@ services:
       MYSQL_DATABASE: "rkn"
       MYSQL_USER: "serg470"
       MYSQL_PASSWORD: "n95ow4"
-    ports:
-      - "0.0.0.0:3306:3306"
+#    ports:
+#      - "0.0.0.0:3306:3306"
+    depends_on:
+      - web
+      - php
   web:
     build: ./nginx/
 #    image: nginx:latest
@@ -28,18 +31,18 @@ services:
     container_name: nginx
     volumes:
       - ./nginx/site.conf:/etc/nginx/conf.d/site.conf
-      - ./nginx/web:/var/www/
+      - ./nginx/web:/var/www/html
     ports:
       - 80:80
-    links:
+    depends_on:
       - php
   php:
     build: ./php/
     image: php:7.2-fpm
     restart: always
     container_name: php7.2
-    ports: 
-      - 9000:9000
+#    ports: 
+#      - 9000:9000
     volumes:
-      - ./nginx/web:/var/www
+      - ./nginx/web:/var/www/html
       - ./php/php.ini:/usr/local/etc/php.ini

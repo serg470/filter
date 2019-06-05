@@ -23,7 +23,7 @@
     <!-- HTML code from Bootply.com editor -->
 
 <?php
-$servername = "192.168.1.134";
+$servername = "mysql";
 $username = "serg";
 $password = "n95ow4";
 $dbname = "rkn";
