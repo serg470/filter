@@ -4,7 +4,7 @@ WORKDIR /home/
 
 COPY rkn.sh ./
 
-RUN apk add --no-cache wget unzip bash grep && \
+RUN apk add --no-cache wget unzip bash grep mysql-client && \
     chmod -R 777 rkn.sh && \
     echo '0  *  *  *  *    /home/rkn.sh' > /etc/crontabs/root
 #    wget -P /home/zapret https://github.com/zapret-info/z-i/archive/master.zip && \

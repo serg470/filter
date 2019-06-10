@@ -3,6 +3,7 @@
 user=serg
 password=n95ow4
 database=rkn
+host=mysql
 
 #Get and prepair blocked IPs and domains
 wget -P /home/zapret/ https://github.com/zapret-info/z-i/archive/master.zip
@@ -19,7 +20,7 @@ grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' /home/zapret/du
 #sleep 30m
 
 #Insert all to MySQL database
-mysql --host="127.0.0.1" --user="$user" --password="$password" --database="$database" --execute="TRUNCATE TABLE ip_addresses"
-mysql --host="127.0.0.1" --user="$user" --password="$password" --database="$database" --execute="TRUNCATE TABLE domain"
-mysql --host="127.0.0.1" --user="$user" --password="$password" --database="$database" --execute="LOAD DATA LOCAL INFILE '/home/zapret/column' INTO TABLE $database.ip_addresses (@ip) SET ip=INET_ATON(@ip);"
-mysql --host="127.0.0.1" --user="$user" --password="$password" --database="$database" --execute="LOAD DATA LOCAL INFILE '/home/zapret/nxdomain.txt' INTO TABLE $database.domain;"
+mysql --host="$host" --user="$user" --password="$password" --database="$database" --execute="TRUNCATE TABLE ip_addresses"
+mysql --host="$host" --user="$user" --password="$password" --database="$database" --execute="TRUNCATE TABLE domain"
+mysql --host="$host" --user="$user" --password="$password" --database="$database" --execute="LOAD DATA LOCAL INFILE '/home/zapret/column' INTO TABLE $database.ip_addresses (@ip) SET ip=INET_ATON(@ip);"
+mysql --host="$host" --user="$user" --password="$password" --database="$database" --execute="LOAD DATA LOCAL INFILE '/home/zapret/nxdomain.txt' INTO TABLE $database.domain;"
