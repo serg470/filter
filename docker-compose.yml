@@ -20,7 +20,7 @@ services:
       MYSQL_USER: "serg470"
       MYSQL_PASSWORD: "n95ow4"
 #    ports:
-#      - "0.0.0.0:3306:3306"
+#      - "127.0.0.1:3306:3306"
     depends_on:
       - web
       - php
@@ -33,7 +33,7 @@ services:
       - ./nginx/site.conf:/etc/nginx/conf.d/site.conf
       - ./nginx/web:/var/www/html
     ports:
-      - 80:80
+      - "127.0.0.1:8081:80"
     depends_on:
       - php
   php:
@@ -41,8 +41,8 @@ services:
     image: php:7.2-fpm
     restart: always
     container_name: php7.2
-#    ports: 
-#      - 9000:9000
+    ports: 
+      - "127.0.0.1:9000:9000"
     volumes:
       - ./nginx/web:/var/www/html
       - ./php/php.ini:/usr/local/etc/php.ini
