@@ -15,10 +15,10 @@ services:
       - /opt/data/mysql:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: "n95ow4"
+      MYSQL_ROOT_PASSWORD: "*****"
       MYSQL_DATABASE: "rkn"
-      MYSQL_USER: "serg470"
-      MYSQL_PASSWORD: "n95ow4"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "*****"
 #    ports:
 #      - "127.0.0.1:3306:3306"
     depends_on:
